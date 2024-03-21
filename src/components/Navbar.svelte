@@ -3,7 +3,6 @@
 	import Moon from 'svelte-radix/Moon.svelte';
 	import { Button } from '$lib/components/ui/button';
 	import { toggleMode } from 'mode-watcher';
-	import { page } from '$app/stores';
 
 	let toggleCount: number = 0;
 	let intervalId: NodeJS.Timeout | undefined;

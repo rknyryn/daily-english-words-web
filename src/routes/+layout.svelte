@@ -1,6 +1,6 @@
 <script>
 	import '../app.pcss';
-	import Navbar from './Navbar.svelte';
+	import Navbar from '@components/Navbar.svelte';
 </script>
 
 <Navbar />

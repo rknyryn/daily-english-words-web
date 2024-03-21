@@ -19,6 +19,7 @@ interface GetWordDefinitionResponseType extends BaseResponseType {
 		verb: string | undefined;
 	};
 }
+
 interface GetExampleSentencesResponseType extends BaseResponseType {
 	example: string[];
 }
@@ -28,7 +29,7 @@ async function getWordDefinition(word: string): Promise<GetWordDefinitionRespons
 	const options = {
 		method: 'GET',
 		headers: {
-			'X-RapidAPI-Key': 'api-key',
+			'X-RapidAPI-Key': import.meta.env.VITE_API_KEY,
 			'X-RapidAPI-Host': 'twinword-word-graph-dictionary.p.rapidapi.com'
 		}
 	};
@@ -49,7 +50,7 @@ async function getExampleSentences(
 	const options = {
 		method: 'GET',
 		headers: {
-			'X-RapidAPI-Key': 'api-key',
+			'X-RapidAPI-Key': import.meta.env.VITE_API_KEY,
 			'X-RapidAPI-Host': 'twinword-word-graph-dictionary.p.rapidapi.com'
 		}
 	};

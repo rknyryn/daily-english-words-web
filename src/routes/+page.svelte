@@ -7,6 +7,7 @@
 	import * as api from '../api/api';
 	import CustomStorageManager from '../utils/storageManager';
 	import { safeJsonParse } from '../extensions/jsonParseExtensions';
+	import Loading from '@components/Loading.svelte';
 
 	type DataType = {
 		word: string;
@@ -90,9 +91,10 @@
 		<h1 class="scroll-m-20 text-center text-4xl font-extrabold tracking-tight lg:text-5xl">
 			9 Random English Words Every Day
 		</h1>
+
 		<section-card-list class="flex flex-col items-center justify-center gap-4">
 			{#if loading}
-				<h1>LOADING..</h1>
+				<Loading />
 			{:else if data.length > 0}
 				{#each data as d, index}
 					<Card.Root class="">
