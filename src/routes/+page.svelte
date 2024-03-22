@@ -1,30 +1,19 @@
 <script lang="ts">
+	import * as Accordion from '$lib/components/ui/accordion';
+	import * as Alert from '$lib/components/ui/alert';
 	import * as Card from '$lib/components/ui/card';
 	import { onMount } from 'svelte';
 	import * as Common from '../assets/common-words.json';
-	import * as Accordion from '$lib/components/ui/accordion';
-	import * as Alert from '$lib/components/ui/alert';
 	import * as api from '../api/api';
 	import CustomStorageManager from '../utils/storageManager';
 	import { safeJsonParse } from '../extensions/jsonParseExtensions';
 	import Loading from '@components/Loading.svelte';
-
-	type DataType = {
-		word: string;
-		ipa: string;
-		meaning: {
-			adjective: string | undefined;
-			adverb: string | undefined;
-			noun: string | undefined;
-			verb: string | undefined;
-		};
-		example: string[];
-	};
+	import WordCard, { type WordCardDataType } from '@components/WordCard.svelte';
 
 	const LOCAL_STORAGE_DATA_KEY = 'data';
 
 	//#region Variables
-	let data: DataType[] = [];
+	let data: WordCardDataType[] = [];
 	let loading: boolean = true;
 	//#endregion
 
@@ -32,7 +21,7 @@
 	const getRandomWord = () => Common.words[~~(Math.random() * Common.words.length)];
 	//#endregion
 
-	async function fetchWordData(word: string): Promise<DataType | null> {
+	async function fetchWordData(word: string): Promise<WordCardDataType | null> {
 		const wordDefinition = await api.getWordDefinition(word);
 		const wordExampleSentences = await api.getExampleSentences(word);
 
@@ -40,7 +29,7 @@
 			return null;
 		}
 
-		let response: DataType = {
+		let response: WordCardDataType = {
 			word: wordDefinition.request,
 			ipa: wordDefinition.ipa,
 			meaning: {
@@ -60,7 +49,7 @@
 		let storedData = CustomStorageManager.getData(LOCAL_STORAGE_DATA_KEY);
 
 		if (storedData !== null) {
-			data = safeJsonParse<DataType[]>(storedData) ?? [];
+			data = safeJsonParse<WordCardDataType[]>(storedData) ?? [];
 			loading = false;
 			return;
 		}
@@ -97,9 +86,13 @@
 				<Loading />
 			{:else if data.length > 0}
 				{#each data as d, index}
-					<Card.Root>
+					<WordCard data={d} {index} />
+
+					<!-- <Card.Root class="">
 						<Card.Header>
-							<Card.Title class="text-2xl capitalize">{d.word}</Card.Title>
+							<Card.Title class="flex gap-3 text-2xl capitalize ">
+								{d.word}
+							</Card.Title>
 						</Card.Header>
 						<Card.Content class="grid gap-2">
 							{#if d.meaning.noun}
@@ -149,7 +142,7 @@
 								</Accordion.Root>
 							{/if}
 						</Card.Content>
-					</Card.Root>
+					</Card.Root> -->
 				{/each}
 			{/if}
 		</section-card-list>
