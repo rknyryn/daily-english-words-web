@@ -1,4 +1,4 @@
-# Daily Words (English Vocabulary App) 
+# Daily Words (English Vocabulary) 
 
 This application is a simple tool designed to enhance your English vocabulary by providing you with nine new words every day along with their meanings and example usages. 
 
