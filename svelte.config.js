@@ -24,7 +24,7 @@ const config = {
 			assets: 'static'
 		}),
 		paths: {
-			base: process.env.NODE_ENV === 'production' ? '/daily-english-words-web.github.io' : ''
+			base: process.env.NODE_ENV === 'production' ? process.env.BASE_PATH : ''
 		}
 	}
 };
