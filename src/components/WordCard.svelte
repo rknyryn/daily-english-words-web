@@ -44,15 +44,11 @@
 		window.speechSynthesis.speak(Speaker);
 		isSpeaking = true;
 		Speaker.addEventListener('end', () => {
-			console.log('speak end');
 			isSpeaking = false;
 		});
 	}
 	onMount(() => {
 		Speaker = new SpeechSynthesisUtterance();
-		var voices = window.speechSynthesis.getVoices();
-		console.log(voices);
-		// Speaker.voice = voices[5];
 	});
 </script>
 
@@ -63,13 +59,15 @@
 
 			<!-- svelte-ignore a11y-click-events-have-key-events -->
 			<!-- svelte-ignore a11y-no-static-element-interactions -->
-			<span class="play-button" on:click={() => Speech(data.word)}>
-				{#if isSpeaking}
-					<Pause />
-				{:else}
-					<Play />
-				{/if}
-			</span>
+			{#if 'speechSynthesis' in window}
+				<span class="play-button" on:click={() => Speech(data.word)}>
+					{#if isSpeaking}
+						<Pause />
+					{:else}
+						<Play />
+					{/if}
+				</span>
+			{/if}
 
 			<!-- <Select.Root bind:selected={SelectedSpeakerLang[index]}>
                 <Select.Trigger class="w-[180px]">
