@@ -97,7 +97,7 @@
 				<Loading />
 			{:else if data.length > 0}
 				{#each data as d, index}
-					<Card.Root class="">
+					<Card.Root>
 						<Card.Header>
 							<Card.Title class="text-2xl capitalize">{d.word}</Card.Title>
 						</Card.Header>
