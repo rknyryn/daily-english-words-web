@@ -49,8 +49,6 @@
 	}
 	onMount(() => {
 		Speaker = new SpeechSynthesisUtterance();
-		// var voices = window.speechSynthesis.getVoices();
-		// Speaker.voice = voices[5];
 	});
 </script>
 
