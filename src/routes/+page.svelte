@@ -1,7 +1,4 @@
 <script lang="ts">
-	import * as Accordion from '$lib/components/ui/accordion';
-	import * as Alert from '$lib/components/ui/alert';
-	import * as Card from '$lib/components/ui/card';
 	import { onMount } from 'svelte';
 	import * as Common from '../assets/common-words.json';
 	import * as api from '../api/api';
