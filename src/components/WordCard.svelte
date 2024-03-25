@@ -25,13 +25,17 @@
 <Card.Root class="">
 	<Card.Header>
 		<Card.Title class="flex justify-between gap-3 text-2xl capitalize ">
-			{data.word}
+			{#if data?.word}
+				{data.word}
 
-			<PlaySound text={data.word} />
+				<PlaySound text={data.word} />
+			{:else}
+				Word
+			{/if}
 		</Card.Title>
 	</Card.Header>
 	<Card.Content class="grid gap-2">
-		{#if data.meaning.noun}
+		{#if data?.meaning?.noun}
 			<Alert.Root>
 				<Alert.Title>Noun</Alert.Title>
 				<Alert.Description>
@@ -39,7 +43,7 @@
 				</Alert.Description>
 			</Alert.Root>
 		{/if}
-		{#if data.meaning.adverb}
+		{#if data?.meaning?.adverb}
 			<Alert.Root>
 				<Alert.Title>Adverb</Alert.Title>
 				<Alert.Description>
@@ -47,7 +51,7 @@
 				</Alert.Description>
 			</Alert.Root>
 		{/if}
-		{#if data.meaning.verb}
+		{#if data?.meaning?.verb}
 			<Alert.Root>
 				<Alert.Title>Verb</Alert.Title>
 				<Alert.Description>
@@ -55,7 +59,7 @@
 				</Alert.Description>
 			</Alert.Root>
 		{/if}
-		{#if data.meaning.adjective}
+		{#if data?.meaning?.adjective}
 			<Alert.Root>
 				<Alert.Title>Adjective</Alert.Title>
 				<Alert.Description>
@@ -63,7 +67,7 @@
 				</Alert.Description>
 			</Alert.Root>
 		{/if}
-		{#if data.example}
+		{#if data?.example}
 			<Accordion.Root class="rounded-md border px-4 hover:border-slate-400">
 				<Accordion.Item value={index.toString()}>
 					<Accordion.Trigger>Examples</Accordion.Trigger>
