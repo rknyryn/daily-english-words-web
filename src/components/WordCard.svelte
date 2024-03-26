@@ -14,80 +14,28 @@
 
 <script lang="ts">
 	import * as Accordion from '$lib/components/ui/accordion';
-	import { onMount } from 'svelte';
 	import * as Alert from '$lib/components/ui/alert';
 	import * as Card from '$lib/components/ui/card';
-	import Pause from './Pause.svelte';
-	import Play from './Play.svelte';
+	import PlaySound from './PlaySound.svelte';
 
 	export let data: WordCardDataType;
 	export let index: number;
-
-	let Speaker: SpeechSynthesisUtterance;
-	let isSpeaking: boolean = false;
-
-	let SelectedSpeakerLang = { label: 'English (US)', value: 'en-US' };
-	let SpeakerLangOptions: { label: string; value: string }[] = [
-		{ label: 'English (US)', value: 'en-US' },
-		{ label: 'Turkish', value: 'tr-TR' }
-	];
-
-	function Speech(text: string) {
-		if (isSpeaking) {
-			window.speechSynthesis.cancel();
-			isSpeaking = false;
-			return;
-		}
-
-		Speaker.lang = SelectedSpeakerLang.value || 'en-US';
-		Speaker.text = text;
-		window.speechSynthesis.speak(Speaker);
-		isSpeaking = true;
-		Speaker.addEventListener('end', () => {
-			isSpeaking = false;
-		});
-	}
-	onMount(() => {
-		Speaker = new SpeechSynthesisUtterance();
-	});
 </script>
 
 <Card.Root class="">
 	<Card.Header>
-		<Card.Title class="flex gap-3 text-2xl capitalize ">
-			{data.word}
+		<Card.Title class="flex justify-between gap-3 text-2xl capitalize ">
+			{#if data?.word}
+				{data.word}
 
-			<!-- svelte-ignore a11y-click-events-have-key-events -->
-			<!-- svelte-ignore a11y-no-static-element-interactions -->
-			{#if 'speechSynthesis' in window}
-				<span class="play-button" on:click={() => Speech(data.word)}>
-					{#if isSpeaking}
-						<Pause />
-					{:else}
-						<Play />
-					{/if}
-				</span>
+				<PlaySound text={data.word} />
+			{:else}
+				Word
 			{/if}
-
-			<!-- <Select.Root bind:selected={SelectedSpeakerLang[index]}>
-                <Select.Trigger class="w-[180px]">
-                    <Select.Value />
-                </Select.Trigger>
-                <Select.Content>
-                    <Select.Group>
-                        {#each SpeakerLangOptions as lang}
-                            <Select.Item value={lang.value} label={lang.label}>
-                                {lang.label}
-                            </Select.Item>
-                        {/each}
-                    </Select.Group>
-                </Select.Content>
-                <Select.Input name="favoriteFruit" />
-            </Select.Root> -->
 		</Card.Title>
 	</Card.Header>
 	<Card.Content class="grid gap-2">
-		{#if data.meaning.noun}
+		{#if data?.meaning?.noun}
 			<Alert.Root>
 				<Alert.Title>Noun</Alert.Title>
 				<Alert.Description>
@@ -95,7 +43,7 @@
 				</Alert.Description>
 			</Alert.Root>
 		{/if}
-		{#if data.meaning.adverb}
+		{#if data?.meaning?.adverb}
 			<Alert.Root>
 				<Alert.Title>Adverb</Alert.Title>
 				<Alert.Description>
@@ -103,7 +51,7 @@
 				</Alert.Description>
 			</Alert.Root>
 		{/if}
-		{#if data.meaning.verb}
+		{#if data?.meaning?.verb}
 			<Alert.Root>
 				<Alert.Title>Verb</Alert.Title>
 				<Alert.Description>
@@ -111,7 +59,7 @@
 				</Alert.Description>
 			</Alert.Root>
 		{/if}
-		{#if data.meaning.adjective}
+		{#if data?.meaning?.adjective}
 			<Alert.Root>
 				<Alert.Title>Adjective</Alert.Title>
 				<Alert.Description>
@@ -119,7 +67,7 @@
 				</Alert.Description>
 			</Alert.Root>
 		{/if}
-		{#if data.example}
+		{#if data?.example}
 			<Accordion.Root class="rounded-md border px-4 hover:border-slate-400">
 				<Accordion.Item value={index.toString()}>
 					<Accordion.Trigger>Examples</Accordion.Trigger>
