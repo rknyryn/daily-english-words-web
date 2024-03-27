@@ -10,7 +10,10 @@
 
 <!-- svelte-ignore a11y-no-static-element-interactions -->
 <div
-	class={cn('card-root rounded-xl border bg-card text-card-foreground shadow', className)}
+	class={cn(
+		'w-[350px] rounded-xl border bg-card text-card-foreground shadow md:w-[720px] ',
+		className
+	)}
 	{...$$restProps}
 	on:click
 	on:focusin
@@ -20,16 +23,3 @@
 >
 	<slot />
 </div>
-
-<style lang="scss">
-	.card-root {
-		width: 720px;
-		transition: width 0.5s ease;
-	}
-
-	@media screen and (max-width: 768px) {
-		.card-root {
-			width: 350px;
-		}
-	}
-</style>
