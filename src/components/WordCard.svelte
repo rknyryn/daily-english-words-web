@@ -60,7 +60,10 @@
 			<!-- svelte-ignore a11y-click-events-have-key-events -->
 			<!-- svelte-ignore a11y-no-static-element-interactions -->
 			{#if 'speechSynthesis' in window}
-				<span class="play-button" on:click={() => Speech(data.word)}>
+				<span
+					class="cursor-pointer select-none transition-all duration-100 ease-in-out hover:scale-105"
+					on:click={() => Speech(data.word)}
+				>
 					{#if isSpeaking}
 						<Pause />
 					{:else}
@@ -135,15 +138,3 @@
 		{/if}
 	</Card.Content>
 </Card.Root>
-
-<style lang="scss">
-	.play-button {
-		cursor: pointer;
-		user-select: none;
-		transition: all ease-in-out 100ms;
-
-		&:hover {
-			transform: scale(1.05);
-		}
-	}
-</style>

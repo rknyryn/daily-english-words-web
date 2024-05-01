@@ -23,7 +23,7 @@
 	}
 </script>
 
-<section class="sticky top-0 flex w-full border-b z-50">
+<section class="sticky top-0 z-50 flex w-full border-b">
 	<nav class="container flex flex-row items-center justify-between gap-14 p-4 backdrop-blur">
 		<nav-logo class="font-semibold">DAILY WORDS</nav-logo>
 		<nav-buttons>

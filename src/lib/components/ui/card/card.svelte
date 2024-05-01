@@ -11,7 +11,7 @@
 <!-- svelte-ignore a11y-no-static-element-interactions -->
 <div
 	class={cn(
-		'w-[350px] rounded-xl border bg-card text-card-foreground shadow md:w-[720px] ',
+		'w-[350px] rounded-xl border bg-card text-card-foreground shadow transition-[width] duration-500 ease-in-out md:w-[720px]',
 		className
 	)}
 	{...$$restProps}
